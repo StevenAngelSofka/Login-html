@@ -29,17 +29,17 @@ Para probar el login, utiliza las siguientes credenciales:
 ### 1. Interfaz de la aplicación
 Esta es la vista de cómo se muestra la aplicación de login:
 
-![Interfaz de la aplicación](./img/login.png)
+![Interfaz de la aplicación](./assets/img/login.png)
 
 ### 2. Mensajes de error
 Así se muestran los mensajes de error si algún campo de entrada está vacío:
 
-![Mensajes de error](./img/error.png)
+![Mensajes de error](./assets/img/error.png)
 
 ### 3. Contenido del `localStorage`
 Cuando el login es exitoso, los datos se guardan en el `localStorage` del navegador. A continuación se muestra cómo se ve el contenido de `localStorage` después de un login exitoso:
 
-![Contenido del localStorage](./img/localStorage.png)
+![Contenido del localStorage](./assets/img/localStorage.png)
 
 ## Instrucciones de instalación
 
