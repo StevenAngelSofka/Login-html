@@ -1,51 +1,129 @@
-# Login App
+# Frontend Node.js Project Documentation
 
-Esta es una simple aplicación de login construida con HTML, CSS y JavaScript. Permite al usuario ingresar sus credenciales, validarlas, y redirigirlo o mostrar mensajes de éxito o error según el caso. La aplicación también utiliza el almacenamiento local (localStorage) para guardar la información del usuario al momento de un inicio de sesión exitoso.
+Este proyecto es un sistema de frontend que utiliza Node.js como entorno para correr la aplicación. Se comunica con un backend previamente desarrollado en Java, que corre en el puerto `8080`. La aplicación ofrece módulos para login, registro y un dashboard dinámico que muestra información del usuario autenticado.
 
-## Características
+## Descripción
+- **Tecnología principal:** Node.js
+- **Motor de plantillas:** `.ejs`
+- **Backend asociado:** Java Spring Boot (corriendo en el puerto `8080`)
+- **Puerto del frontend:** `3500`
+- **Módulos incluidos:** Login, Register, Dashboard
 
-- Formulario de login con campos de **username** y **password**.
-- Validación de los campos para evitar que se envíen vacíos.
-- Mensajes de error que se muestran debajo de cada campo si están vacíos.
-- Almacenamiento de las credenciales en el `localStorage` tras un login exitoso.
-- Alerta de confirmación del LOGIN correcto.
+La aplicación permite a los usuarios:
+1. Iniciar sesión con su correo electrónico y contraseña.
+2. Registrarse proporcionando información como número de identificación, nombre, correo electrónico y contraseña.
+3. Acceder a un dashboard que muestra información dinámica del usuario autenticado.
 
-## Credenciales de Prueba
+Adicionalmente, se manejan errores mediante alertas en función de las respuestas recibidas del backend.
 
-Para probar el login, utiliza las siguientes credenciales:
+---
 
-- **Username**: `admin`
-- **Password**: `admin1234`
+## Estructura del proyecto
+La estructura de carpetas del proyecto es la siguiente:
 
-### **Pasos para probar la aplicación:**
-1. Abre el archivo `index.html` en tu navegador.
-2. Ingresa el **Username** y **Password** mencionados arriba en los campos correspondientes.
-3. Haz clic en el botón **Login**.
-4. Si las credenciales son correctas, verás un mensaje de alerta que indica "Login successful! Please check LocalStorage." y los datos se almacenarán en el `localStorage`.
-5. Si las credenciales son incorrectas, verás un mensaje de error que indica que las credenciales son incorrectas.
+```
+LOGIN-HTML/
+├── assets/                         # Archivos estáticos como imágenes, íconos, etc.
+├── node_modules/                   # Dependencias instaladas de Node.js
+├── public/                         # Archivos de la primera clase
+├── src/                            # Código fuente principal
+│   ├── controllers/                # Controladores que manejan la lógica de la aplicación
+│   │   └── authController.js
+│   ├── models/                     # Modelos de datos para manejar las entidades de la aplicación
+│   │   ├── LoginUser.js
+│   │   └── RegisterUser.js
+│   ├── routes/                     # Definición de rutas principales de la aplicación
+│   │   └── mainRoutes.js
+│   ├── views/                      # Vistas .ejs organizadas por módulo
+│       ├── dashboard/              # Archivos relacionados con el módulo del dashboard
+│       │   ├── dashboard.css
+│       │   ├── dashboard.ejs
+│       │   └── dashboard.js
+│       ├── login/                  # Archivos relacionados con el módulo de login
+│       │   ├── login.css
+│       │   ├── login.ejs
+│       │   └── login.js
+│       └── register/               # Archivos relacionados con el módulo de registro
+│           ├── register.css
+│           ├── register.ejs
+│           └── register.js
+├── .env                            # Variables de entorno para configuración
+├── .gitignore                      # Archivos y carpetas ignorados por Git
+├── app.js                          # Punto de entrada de la aplicación
+├── package-lock.json               # Información de las versiones exactas de las dependencias
+├── package.json                    # Archivo de configuración del proyecto
+└── README.md                       # Documentación del proyecto
+```
 
-## Imágenes
+---
 
-### 1. Interfaz de la aplicación
-Esta es la vista de cómo se muestra la aplicación de login:
+## Detalles de los módulos
 
-![Interfaz de la aplicación](./img/login.png)
+### Login
+- **Vista:** `login.ejs`
+- **Requisitos:**
+  - Email
+  - Contraseña
+- **Descripción:** Permite a los usuarios autenticarse en el sistema enviando las credenciales al backend.
 
-### 2. Mensajes de error
-Así se muestran los mensajes de error si algún campo de entrada está vacío:
+### Register
+- **Vista:** `register.ejs`
+- **Requisitos:**
+  - Número de identificación
+  - Nombre
+  - Email
+  - Contraseña
+- **Descripción:** Permite a nuevos usuarios registrarse en el sistema. La información se envía al backend para ser almacenada.
 
-![Mensajes de error](./img/error.png)
+### Dashboard
+- **Vista:** `dashboard.ejs`
+- **Descripción:** Muestra información dinámica sobre el usuario que inició sesión. Los datos se obtienen del backend.
 
-### 3. Contenido del `localStorage`
-Cuando el login es exitoso, los datos se guardan en el `localStorage` del navegador. A continuación se muestra cómo se ve el contenido de `localStorage` después de un login exitoso:
+---
 
-![Contenido del localStorage](./img/localStorage.png)
-
-## Instrucciones de instalación
-
-Para probar la aplicación en tu máquina local:
-
+## Configuración
+### Instalación
 1. Clona este repositorio:
-
    ```bash
-   git clone https://github.com/StevenAngelSofka/Login-html.git
+   git clone https://github.com/StevenAngelSofka/Login-html
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+
+3. Crea un archivo `.env` basado en el archivo de ejemplo y configura las variables necesarias, como el puerto del servidor (`PORT=3500`).
+
+4. Inicia el servidor:
+   ```bash
+   npm run start
+   ```
+
+---
+
+## Imágenes de los módulos
+A continuación, se presentan capturas de pantalla de cada módulo:
+
+### Login
+![Login](assets/img/login.png)
+
+### Register
+![Register](assets/img/register.png)
+
+### Dashboard
+![Dashboard](assets/img/dashboard.png)
+
+---
+
+## Notas adicionales
+- **Backend:** El backend desarrollado en Java maneja todas las operaciones relacionadas con la autenticación, el registro y la gestión de datos del usuario.
+- **EJS:** Las vistas están diseñadas con `.ejs` para permitir la renderización dinámica de contenido en el servidor.
+- **Modelos:**
+  - `LoginUser.js`: Modela los datos requeridos para el inicio de sesión.
+  - `RegisterUser.js`: Modela los datos necesarios para el registro de un nuevo usuario.
+- **Manejo de errores:** Se muestran alertas al usuario según las respuestas del backend, como errores de validación o problemas de autenticación.
+- **Local Storage:** Se usa el local storage para guardar el token obtenido desde el backend para usarlo cuando sea necesario.
+
+---
+
+
+

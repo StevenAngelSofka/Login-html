@@ -1,43 +1,34 @@
-const validUsername = "admin";
-const validPassword = "admin1234";
+import express from 'express';
+import dotenv from 'dotenv';
+import path from 'path';
+import mainRoutes from './src/routes/mainRoutes.js';
 
-document.getElementById('login-form').addEventListener('submit', (e) => {
-  e.preventDefault(); 
+dotenv.config();
+const __dirname  = path.resolve();
 
-  const username = document.getElementById('username');
-  const password = document.getElementById('password');
-  let valid = true;
+// Configuración del server
+const app = express();
+const PORT = process.env.PORT || 3500;
 
-  const errorMessages = document.querySelectorAll('.error-message');
-  errorMessages.forEach(msg => msg.classList.add('hidden'));
+app.use(express.json());
 
-  if (username.value.trim() === "") {
-    showError(username);
-    valid = false;
-  }
+// Configuración de vistas
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'src/views'));
 
-  if (password.value.trim() === "") {
-    showError(password);
-    valid = false;
-  }
+// Sirve archivos estáticos 
+app.use('/login', express.static(path.join(__dirname, 'src/views/login')));
+app.use('/register', express.static(path.join(__dirname, 'src/views/register')));
+app.use('/dashboard', express.static(path.join(__dirname, 'src/views/dashboard')));
 
-  if (valid) {
-    if (username.value === validUsername && password.value === validPassword) {
+app.use('/controllers', express.static(path.resolve('src/controllers')));
+app.use('/models', express.static(path.resolve('src/models')));
 
-      alert("Login successful! Please check LocalStorage.");
-      localStorage.setItem("username", username.value);
-      localStorage.setItem("loggedIn", true);
 
-    } else {
-      // Credenciales incorrectas
-      alert("Incorrect username or password. Please try again.");
-    }
-  }
+// Rutas
+app.use('', mainRoutes);
+
+
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });
-
-const showError = (inputElement) => {
-  const errorMessage = inputElement.nextElementSibling;
-  if (errorMessage && errorMessage.classList.contains('error-message')) {
-    errorMessage.classList.remove('hidden');
-  }
-};
