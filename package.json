@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Esta es una simple aplicación de login construida con HTML, CSS y JavaScript. Permite al usuario ingresar sus credenciales, validarlas, y redirigirlo o mostrar mensajes de éxito o error según el caso. La aplicación también utiliza el almacenamiento local (localStorage) para guardar la información del usuario al momento de un inicio de sesión exitoso.",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
@@ -19,6 +20,9 @@
   },
   "homepage": "https://github.com/StevenAngelSofka/Login-html#readme",
   "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "ejs": "^3.1.10",
     "express": "^4.21.2"
   },
   "devDependencies": {
